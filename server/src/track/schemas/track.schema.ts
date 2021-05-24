@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, ObjectId } from 'mongoose';
 import * as moongoose from 'mongoose';
 
 export type TrackDocument = Track & Document;
@@ -26,7 +26,7 @@ export class Track {
     audio: string;
     // сохранение ссылки на массив
     @Prop({type: [{type: moongoose.Schema.Types.ObjectId, ref: 'Comment' }]})
-    comment: Comment[]
+    comments: Comment[];
 }
 
 export const TrackSchema = SchemaFactory.createForClass(Track);

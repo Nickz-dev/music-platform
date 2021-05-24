@@ -1,6 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model, ObjectId} from "mongoose";
+import { CreateCommentDto } from "./dto/create-comment.dto";
 import { CreateTrackDto } from "./dto/create-track.dto";
 import {Comment, CommentDocument} from "./schemas/comment.schema";
 import {Track, TrackDocument} from "./schemas/track.schema";
@@ -23,14 +24,22 @@ export class TrackService {
         return tracks;
     }
 
-    // Страница детального описания трека
     async getOne(id : ObjectId) : Promise<Track> {
-        const track = await this.trackModel.findById(id)
+        const track = await this.trackModel.findById(id).populate('comments')
         return track;
     }
 
     async delete(id: ObjectId) : Promise<ObjectId> {
         const track = await this.trackModel.findByIdAndDelete(id)
         return track._id
+    }
+
+    async addComment(dto: CreateCommentDto) : Promise<Comment> {
+        const track = await this.trackModel.findById(dto.trackId);
+        const comment = await this.commentModel.create({...dto})
+        track.comments.push(comment._id)
+        //сохранение в базе данных
+        await track.save();
+        return comment
     }
 }
