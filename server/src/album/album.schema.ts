@@ -25,7 +25,7 @@ export class Album {
 
     // сохранение ссылки на массив
     @Prop({type: [{type: moongoose.Schema.Types.ObjectId, ref: 'Track' }]})
-    comment: Track[]
+    track: Track[]
 }
 
 export const AlbumSchema = SchemaFactory.createForClass(Album);
