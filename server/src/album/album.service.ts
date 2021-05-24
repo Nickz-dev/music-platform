@@ -15,8 +15,9 @@ export class AlbumService {
         return album;
     }
 
-    async getAll() {
-
+    async getAll() : Promise<Album[]> {
+        const albums = await this.albumModel.find()
+        return albums;
     }
 
     // Страница детального описания альбома

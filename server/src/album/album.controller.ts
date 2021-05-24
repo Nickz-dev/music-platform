@@ -14,7 +14,7 @@ export class AlbumController {
     }
     @Get()
     getAll() {
-        return 'TEST'
+        return this.albumService.getAll()
     }
 
     // Страница детального описания альбома

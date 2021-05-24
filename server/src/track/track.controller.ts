@@ -15,7 +15,7 @@ export class TrackController {
     }
     @Get()
     getAll() {
-        return 'WORK'
+        return this.trackService.getAll()
     }
 
     // Страница детального описания трека
