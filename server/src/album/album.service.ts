@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {Model} from "mongoose";
+import {Model, ObjectId} from "mongoose";
 import {Album, AlbumDocument} from "./album.schema";
 import {CreateAlbumDto} from "./dto/create-album.dto";
 
@@ -20,9 +20,10 @@ export class AlbumService {
         return albums;
     }
 
-    // Страница детального описания альбома
-    async getOne() {
 
+    async getOne(id: ObjectId) : Promise<Album> {
+        const album = await this.albumModel.findById(id)
+        return album;
     }
 
     async delete() {

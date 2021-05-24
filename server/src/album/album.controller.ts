@@ -1,4 +1,5 @@
-import {Body, Controller, Get, Post } from "@nestjs/common";
+import {Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { ObjectId } from "mongoose";
 import { AlbumService } from "./album.service";
 import { CreateAlbumDto } from "./dto/create-album.dto";
 
@@ -17,9 +18,9 @@ export class AlbumController {
         return this.albumService.getAll()
     }
 
-    // Страница детального описания альбома
-    getOne() {
-
+    @Get(':id')
+    getOne(@Param('id') id: ObjectId) {
+        return this.albumService.getOne(id)
     }
 
     delete() {
