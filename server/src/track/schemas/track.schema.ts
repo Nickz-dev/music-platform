@@ -6,8 +6,6 @@ export type TrackDocument = Track & Document;
 
 @Schema()
 export class Track {
-    @Prop()
-    id: number;
 
     @Prop()
     name: string;
@@ -26,7 +24,7 @@ export class Track {
 
     @Prop()
     audio: string;
-
+    // сохранение ссылки на массив
     @Prop({type: [{type: moongoose.Schema.Types.ObjectId, ref: 'Comment' }]})
     comment: Comment[]
 }

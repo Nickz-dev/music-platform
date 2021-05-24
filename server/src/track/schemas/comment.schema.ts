@@ -14,6 +14,7 @@ export class Comment {
     @Prop()
     text: string;
 
+    //Сохранение ссылки на объект
     @Prop({type: [{type: moongoose.Schema.Types.ObjectId, ref: 'Track'}]})
     track: Track;
 }
